@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemisah Vokal dan Musik - Premium</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">Pemisah Vokal dan Musik</h1>
+            <div class="developer-info">
+                <span class="blink-dot"></span>
+                <span class="developer-text">Developer: fatur62</span>
+            </div>
+        </header>
 
+        <div class="upload-section">
+            <div class="upload-card">
+                <div class="upload-icon">🎵</div>
+                <h2>Upload File MP3 Anda</h2>
+                <p class="subtitle">Pisahkan vokal dan musik dengan kualitas premium</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".mp3,audio/mpeg" hidden>
+                    <label for="fileInput" class="upload-label">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 15V3M12 3L8 7M12 3L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M2 17L2 19C2 20.1046 2.89543 21 4 21L20 21C21.1046 21 22 20.1046 22 19V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="upload-text">Klik atau drag & drop file MP3</span>
+                        <span class="file-info">Maksimal ukuran: 50MB</span>
+                    </label>
+                </div>
+
+                <div class="file-selected" id="fileSelected" style="display: none;">
+                    <div class="file-icon">📁</div>
+                    <div class="file-details">
+                        <span class="file-name" id="fileName"></span>
+                        <span class="file-size" id="fileSize"></span>
+                    </div>
+                    <button class="remove-btn" id="removeBtn">✕</button>
+                </div>
+
+                <button class="process-btn" id="processBtn" disabled>
+                    <span class="btn-text">Proses Pemisahan</span>
+                    <span class="btn-icon">⚡</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="processing-section" id="processingSection" style="display: none;">
+            <div class="processing-card">
+                <div class="spinner"></div>
+                <h3>Memproses Audio...</h3>
+                <p>Mohon tunggu, ini mungkin memakan waktu beberapa menit</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+        </div>
+
+        <div class="download-section" id="downloadSection" style="display: none;">
+            <div class="download-card">
+                <div class="success-icon">✓</div>
+                <h2>Pemisahan Berhasil!</h2>
+                <p class="success-text">File Anda telah diproses dengan sempurna</p>
+                
+                <div class="download-options">
+                    <div class="download-item">
+                        <div class="download-icon">🎤</div>
+                        <div class="download-info">
+                            <h4>Vokal</h4>
+                            <p>Audio vokal murni</p>
+                        </div>
+                        <button class="download-btn" id="downloadVocal">
+                            <span>Download</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3V15M12 15L8 11M12 15L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M2 17V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-icon">🎸</div>
+                        <div class="download-info">
+                            <h4>Musik</h4>
+                            <p>Instrumental tanpa vokal</p>
+                        </div>
+                        <button class="download-btn" id="downloadMusic">
+                            <span>Download</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3V15M12 15L8 11M12 15L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M2 17V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="download-item featured">
+                        <div class="download-icon">🎶</div>
+                        <div class="download-info">
+                            <h4>Vokal + Musik</h4>
+                            <p>File original lengkap</p>
+                        </div>
+                        <button class="download-btn" id="downloadBoth">
+                            <span>Download</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3V15M12 15L8 11M12 15L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M2 17V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="reset-btn" id="resetBtn">
+                    Proses File Lain
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
